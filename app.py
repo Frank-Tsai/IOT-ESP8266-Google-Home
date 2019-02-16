@@ -45,12 +45,12 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
             googleRequestJson = json.loads(googleRequest)
 
             #{"location": "living", "state": "on", "device": "lights"}
-            if 'what' in googleRequestJson['result']['resolvedQuery']:
-                ESPparameters = googleRequestJson['result']['parameters']
-                ESPparameters['query'] = '?'
+            if "what" in googleRequestJson["result"]["resolvedQuery"]:
+                ESPparameters = googleRequestJson["result"]["parameters"]
+                ESPparameters["query"] = '?'
             else:
-                ESPparameters = googleRequestJson['result']['parameters']
-                ESPparameters['query'] = 'cmd'
+                ESPparameters = googleRequestJson["result"]["parameters"]
+                ESPparameters["query"] = 'cmd'
             # send command to ESP over websocket
             if self.rwebsocket== None:
                 print("Device is not connected!")
@@ -61,7 +61,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
             self.rddata = await self.rwebsocket.recv()
             #{"speech": "It is working", "displayText": "It is working"}
             print(self.rddata)
-            state = json.loads(self.rddata)['state']
+            state = json.loads(self.rddata)["state"]
             self.rddata = '{"speech": "It is turned '+state+'", "displayText": "It is turned '+state+'"}'
 
             response = '\r\n'.join([
