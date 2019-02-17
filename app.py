@@ -8,6 +8,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
     rwebsocket = None
     rddata = None
     async def handler(self):
+        print ("test ws")
         try:
             request_line, headers = await websockets.http.read_message(self.reader)
             method, path, version = request_line[:-2].decode().split(None, 2)
@@ -42,6 +43,7 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
         try:
 
             googleRequest = self.reader._buffer.decode('utf-8')
+            print(googleRequest)
             googleRequestJson = json.loads(googleRequest)
 
             #{"location": "living", "state": "on", "device": "lights"}
