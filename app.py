@@ -49,10 +49,10 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
             #{"location": "living", "state": "on", "device": "lights"}
             if "what" in googleRequestJson["result"]["resolvedQuery"]:
                 ESPparameters = googleRequestJson["result"]["parameters"]
-                ESPparameters["query"] = '?'
+                ESPparameters["query"] = "?"
             else:
                 ESPparameters = googleRequestJson["result"]["parameters"]
-                ESPparameters["query"] = 'cmd'
+                ESPparameters["query"] = "cmd"
             # send command to ESP over websocket
             if self.rwebsocket== None:
                 print("Device is not connected!")
@@ -83,7 +83,7 @@ async def ws_handler(websocket, path):
     game_name = 'g1'
     try:
         HttpWSSProtocol.rwebsocket = websocket
-        await websocket.send(json.dumps({'event': 'OK'}))
+        await websocket.send(json.dumps({"event": "OK"}))
         data ='{"empty":"empty"}'
         while True:
             data = await websocket.recv()
