@@ -43,8 +43,8 @@ class HttpWSSProtocol(websockets.WebSocketServerProtocol):
         response = ''
         try:
 
-            googleRequest = self.reader._buffer.decode('utf-8')
-            print(repr(googleRequest))
+            googleRequest = self.reader._buffer
+            print((googleRequest))
             googleRequestJson = json.loads(googleRequest)
 
             #{"location": "living", "state": "on", "device": "lights"}
